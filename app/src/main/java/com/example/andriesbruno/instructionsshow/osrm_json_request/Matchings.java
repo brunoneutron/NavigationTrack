@@ -12,7 +12,9 @@ public class Matchings {
 
     private String confidence;
 
-    private String geometry;
+    private String geometry_;
+
+    private Geometry geometry;
 
     public String getDuration ()
     {
@@ -54,19 +56,30 @@ public class Matchings {
         this.confidence = confidence;
     }
 
-    public String getGeometry ()
+    public String getGeometry_ ()
+    {
+        return geometry_;
+    }
+
+    public void setGeometry_ (String geometry)
+    {
+        this.geometry_ = geometry;
+    }
+
+    public Geometry getGeometry ()
     {
         return geometry;
     }
 
-    public void setGeometry (String geometry)
+    public void setGeometry (Geometry geometry)
     {
         this.geometry = geometry;
     }
 
+
     @Override
     public String toString()
     {
-        return "ClassPojo [duration = "+duration+", distance = "+distance+", legs = "+legs+", confidence = "+confidence+", geometry = "+geometry+"]";
+        return "ClassPojo [duration = "+duration+", distance = "+distance+", legs = "+legs+", confidence = "+confidence+", geometry_ = "+geometry+"]";
     }
 }

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.andriesbruno.instructionsshow.osrm_json_request.Geometry;
 import com.example.andriesbruno.instructionsshow.osrm_json_request.Matchings;
 import com.example.andriesbruno.instructionsshow.osrm_json_request.osrmMatchAPI;
 import com.google.android.gms.appindexing.Action;
@@ -101,7 +102,7 @@ public class MapsActivity extends AppCompatActivity implements
     double pointY[] = {129.192114, 129.192734, 129.193346, 129.193874, 129.194499, 129.194834, 129.195169, 129.195011, 129.194370, 129.193783, 129.193067, 129.192450, 129.192160, 129.191648};
     double pointX[] = {35.572941, 35.572830, 35.572662, 35.572481, 35.572219, 35.572004, 35.572006, 35.572261, 35.572501, 35.572724, 35.572940, 35.573099, 35.573494, 35.573732};
 
-    String test_query = "http://10.20.24.197:5000/match/v1/driving/129.191513,35.572904;129.192114,35.572941;129.192734,35.572830;129.193346,35.572662;129.193874,35.572481;129.194499,35.572219;129.194834,35.572004;129.195169,35.572006;129.195011,35.572261;129.194370,35.572501;129.193783,35.572724;129.193067,35.572940;129.192450,35.573099;129.192160,35.573494;129.191648,35.573732?timestamps=1412229091;1412229191;1412229291;1412229391;1412229491;1412229591;1412229691;1412229791;1412229891;1412229991;1412230091;1412230191;1412230291;1412230391;1412230491&steps=true";
+    String test_query = "http://10.20.24.197:5000/match/v1/driving/129.191513,35.572904;129.192114,35.572941;129.192734,35.572830;129.193346,35.572662;129.193874,35.572481;129.194499,35.572219;129.194834,35.572004;129.195169,35.572006;129.195011,35.572261;129.194370,35.572501;129.193783,35.572724;129.193067,35.572940;129.192450,35.573099;129.192160,35.573494;129.191648,35.573732?timestamps=1412229091;1412229191;1412229291;1412229391;1412229491;1412229591;1412229691;1412229791;1412229891;1412229991;1412230091;1412230191;1412230291;1412230391;1412230491&steps=true&geometries=geojson";
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -136,6 +137,24 @@ public class MapsActivity extends AppCompatActivity implements
     }
 
     /**
+     * Here we want to make a query to the osrm server and extract the geometry
+     * That way we can draw the path without qerying the google api
+     * it should return a list of latlng
+     */
+
+    public static List<LatLng> geometry_extractor(String query){
+
+        Matchings[] matchingses = getOSRMMatchResponse(query);
+
+
+
+        return null;
+    }
+
+
+
+
+    /**
      * Create polyline drawing function. Will take an array list of LatLng
      */
     public void draw_polyline() {
@@ -160,9 +179,9 @@ public class MapsActivity extends AppCompatActivity implements
 
     public void  test(){
         List<LatLng> decodedPath = PolyUtil.decode(str);
-        Context context = getApplicationContext();
-        Toast toast = Toast.makeText(context,PolyUtil.decode(str).toString(),Toast.LENGTH_LONG);
-        toast.show();
+        //Context context = getApplicationContext();
+        //Toast toast = Toast.makeText(context,PolyUtil.decode(str).toString(),Toast.LENGTH_LONG);
+        //toast.show();
 
         PolylineOptions options = new PolylineOptions();
         options.width(5);
@@ -336,7 +355,7 @@ public class MapsActivity extends AppCompatActivity implements
 
         //Draw our path
         draw_polyline();
-        test();
+        //test();
     }
 
     /**
